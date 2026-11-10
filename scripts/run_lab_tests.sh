@@ -66,7 +66,7 @@ for lab_dir in "$@"; do
   chmod +x "$runner"
   output_file="$(mktemp)"
 
-  if ( cd "$lab_dir" && timeout "${TIMEOUT_SECONDS}s" bash "tests/run_tests.sh" ) > "$output_file" 2>&1; then
+ if ( cd "$lab_dir" 2>/dev/null && timeout "${TIMEOUT_SECONDS}s" bash "tests/run_tests.sh" ) > "$output_file" 2>&1; then
     status="✅ Тесты прошли."
   else
     exit_code=$?
